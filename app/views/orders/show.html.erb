@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Productadapter:</strong>
-  <%= @order.ProductAdapter %>
-</p>
-
-<p>
   <strong>User:</strong>
-  <%= @order.User %>
+  <%= @order.user %>
 </p>
 
 <p>
@@ -15,5 +10,5 @@
   <%= @order.total %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Edit', edit_order_path(@order) %> | <%= link_to 'Back', orders_path
+%>
