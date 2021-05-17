@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products =  Product.filter(params.slice(:category, :brand, :price_lte, :price_gte))
+    @products = @products.public_send("search_by_title_or_description", params.require(:q)) if params.slice(:q).present?
   end
 
   # GET /products/1 or /products/1.json
