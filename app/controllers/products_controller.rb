@@ -13,15 +13,25 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @brands = Brand.all
+    @categories = Category.all
     @product = Product.new
   end
 
   # GET /products/1/edit
   def edit
+    @product = Product.find(params[:id])
+    @product_brand = @product.brand.name
+    @product_category = @product.category.name
+    @brands = Brand.all
+    @categories = Category.all
   end
 
   # POST /products or /products.json
   def create
+    @brands = Brand.all
+    @categories = Category.all
+    # render plain: params[:product].inspect
     @product = Product.new(product_params)
     puts @product
     respond_to do |format|
