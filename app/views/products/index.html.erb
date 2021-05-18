@@ -22,8 +22,8 @@
         <td><%= product.description %></td>
         <td><%= product.price %></td>
         <td><%= product.in_stock %></td>
-        <td><%= product.brand %></td>
-        <td><%= product.category %></td>
+        <td><%= product.brand.name %></td>
+        <td><%= product.category.name %></td>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
