@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ECommerce</title>
+  <title><%= @page_title or "ECommerce" %></title>
   <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <%=
   javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%# <link
@@ -10,148 +10,169 @@
     integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
     crossorigin="anonymous"
     /> %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
   <script
     src="https://kit.fontawesome.com/7f1419bc41.js"
     crossorigin="anonymous"
   ></script>
-  
+
   <style>
-  .boddy{
-    /* position:absolute;
-    top:20%; */
-    height: 78vh;
-  }
- nav {
-    z-index: 77777;
-    color: #ef5b5a;
-    background-color:#f1f1f1
+      .boddy {
+          /* position:absolute;
+          top:20%; */
+          height: 78vh;
+      }
 
-  }
-  header nav .link-size{
-        font-size: 1rem !important;
-  }
+      nav {
+          z-index: 77777;
+          color: #ef5b5a;
+          background-color: #f1f1f1
 
-  .navbar-nav .nav-link, #logo {
-    text-decoration: none;
-    transition: color  ease-in-out 0.3s ;
-  }
-  .navbar-nav .nav-link, a{
-    color: #495057 !important;
-  }
-  .navbar-nav .active {
-    color: #ef5b5a !important;
-  }
-  .navbar-nav .nav-link:hover{
-    color: #ef5b5a !important;
-  }
-    .footer-copyright {
-    background-color: #1a1a1a;
-  }
-  .social-icon {
-    text-align: center;
-    color: #fff;
-    margin: 0 0.7rem;
-    font-size: 1.2rem;
-    transition: background-color 0.5s, color 0.5s;
-  }
-  
-  .social-icon:hover {
-    color: #f25454 !important;
-  }
-  .copyright p {
-    font-size: 1rem;
-    color: #b0b0b0;
-  }
-  .copyright span {
-    font-weight: bold;
-    cursor: pointer;
-    color: #fff;
-  }
+      }
 
-  .btn:hover{
-        color: #ef5b5a;
+      header nav .link-size {
+          font-size: 1rem !important;
+      }
 
-  }
+      .navbar-nav .nav-link, #logo {
+          text-decoration: none;
+          transition: color ease-in-out 0.3s;
+      }
+
+      .navbar-nav .nav-link, a {
+          color: #495057 !important;
+      }
+
+      .navbar-nav .active {
+          color: #ef5b5a !important;
+      }
+
+      .navbar-nav .nav-link:hover {
+          color: #ef5b5a !important;
+      }
+
+      .footer-copyright {
+          background-color: #1a1a1a;
+      }
+
+      .social-icon {
+          text-align: center;
+          color: #fff;
+          margin: 0 0.7rem;
+          font-size: 1.2rem;
+          transition: background-color 0.5s, color 0.5s;
+      }
+
+      .social-icon:hover {
+          color: #f25454 !important;
+      }
+
+      .copyright p {
+          font-size: 1rem;
+          color: #b0b0b0;
+      }
+
+      .copyright span {
+          font-weight: bold;
+          cursor: pointer;
+          color: #fff;
+      }
+
+      .btn:hover {
+          color: #ef5b5a;
+
+      }
   </style>
+  <%= yield :stylesheets %>
+
 </head>
 
 <body>
- <header class="">
- <nav class="navbar navbar-expand-lg w-100 border-bottom border-white">
+<header class="">
+  <nav class="navbar navbar-expand-lg w-100 border-bottom border-white">
 
-        <a class="navbar-brand" id="logo" href="#">E-Commerce</a>
-        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon navbar-toggler-iconn"></span>
-        </button>
-        <div class="collapse navbar-collapse bg-screen" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li   class="nav-item  m-1">
-              <a class="nav-link  link-size" href="#">Home </a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size" href="#">About</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size" href="#">Categories</a>
-            </li>
-            <%# <%= link_to "Improve Your Ruby Skills", "/products" %> 
-            <li class="nav-item dropdown m-1">
-              <a class="nav-link dropdown-toggle  link-size"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>        
-          </ul>
-          <div>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="searchbtn" class="btn  my-2 my-sm-0" type="submit">Search</button>
-            </form>
+    <a class="navbar-brand" id="logo" href="#">E-Commerce</a>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon navbar-toggler-iconn"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-screen" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item  m-1">
+          <a class="nav-link  link-size" href="#">Home </a>
+        </li>
+        <li class="nav-item m-1">
+          <a class="nav-link link-size" href="#">About</a>
+        </li>
+        <li class="nav-item m-1">
+          <a class="nav-link link-size" href="#">Categories</a>
+        </li>
+        <%# <%= link_to "Improve Your Ruby Skills", "/products" %>
+        <li class="nav-item dropdown m-1">
+          <a class="nav-link dropdown-toggle  link-size" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
-          <ul class="navbar-nav ml-auto">
-           <li class="nav-item m-1">
-              <a class="nav-link link-size" href="#">Profile</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size" href="#">Login</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size" href="#">Logout</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
- </header> 
-    <section class="boddy container  ">
-      <%= yield %>
-    </section>
+        </li>
+      </ul>
+      <div>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button id="searchbtn" class="btn  my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item m-1">
+            <%= link_to(edit_user_registration_path, class: "nav-link link-size") do %>
+                <%= image_tag(current_user.avatar, size: "50x50", class: "img-thumbnail rounded-circle") if current_user.avatar.attached? %>
+                <span class="align-middle"><%= current_user.name %></span>
+            <% end %>
+          </li>
+          <li class="nav-item m-1">
+            <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link link-size", method: :delete,  data:{confirm: "You about to sign out, are you sure?"} %>
+          </li>
+        <% else %>
+          <li class="nav-item m-1">
+            <%= link_to "Login", new_user_session_path, class: "nav-link link-size" %>
+          </li>
+          <li class="nav-item m-1">
+            <%= link_to "Register", new_user_registration_path, class: "nav-link link-size" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
+<section class="boddy container  ">
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</section>
 
 <footer>
- <div class="footer-copyright">
-      <div class="container">
-        <div class="row ">
-          <div class="social-links py-2 col-sm-6">
-            <div class="temp">
-              <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-instagram social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-twitter social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-pinterest social-icon pt-2"></i></a>
-            </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="row ">
+        <div class="social-links py-2 col-sm-6">
+          <div class="temp">
+            <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-instagram social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-twitter social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-pinterest social-icon pt-2"></i></a>
           </div>
-          <div class=" py-2 col-sm-6 ">
-            <div class="copyright temp">
-              <p class="pt-2">Copyright &copy; 2020 <span>E-Commerce</span> </p>
-            </div>
+        </div>
+        <div class=" py-2 col-sm-6 ">
+          <div class="copyright temp">
+            <p class="pt-2">Copyright &copy; 2020 <span>E-Commerce</span></p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </footer>
 
 <%# <script
@@ -160,6 +181,6 @@
   crossorigin="anonymous"
 ></script> %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+<style><%= yield :scripts %></style>
 </body>
 </html>
