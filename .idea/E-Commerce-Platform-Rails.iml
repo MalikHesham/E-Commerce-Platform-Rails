@@ -1877,7 +1877,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, ruby-2.7.3-p183) [gem]" level="application" />
-    <orderEntry type="library" name="7f1419bc41" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
