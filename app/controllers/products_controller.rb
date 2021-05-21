@@ -3,7 +3,10 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products =  Product.filter(params.slice(:category, :brand, :price_lte, :price_gte))
+    @products = @products.public_send("search_by_title_or_description", params.fetch(:q)) if params.slice(:q).present?
+    @categories = Category.all
+    @brands = Brand.all
   end
 
   # GET /products/1 or /products/1.json
@@ -12,15 +15,25 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @brands = Brand.all
+    @categories = Category.all
     @product = Product.new
   end
 
   # GET /products/1/edit
   def edit
+    @product = Product.find(params[:id])
+    @product_brand = @product.brand.name
+    @product_category = @product.category.name
+    @brands = Brand.all
+    @categories = Category.all
   end
 
   # POST /products or /products.json
   def create
+    @brands = Brand.all
+    @categories = Category.all
+    # render plain: params[:product].inspect
     @product = Product.new(product_params)
     
     respond_to do |format|

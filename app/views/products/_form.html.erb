@@ -32,14 +32,36 @@
     <%= form.number_field :in_stock %>
   </div>
 
-  <div class="field">
-    <%= form.label :brand_id %>
-    <%= form.text_field :brand_id %>
-  </div>
+<!--  <div class="field">-->
+    <%#= form.label :brand_id %>
+    <%#= form.text_field :brand_id %>
+<!--  </div>-->
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <label for="product[brand_id]">Brand:</label>
+    <select name="product[brand_id]" id="product[brand_id]">
+      <option disabled selected>Select a brand </option>
+      <% @brands.each do |brand| %>
+        <option <% if @product_brand == brand.name  %> selected <% end %>
+              value="<%= brand.id %>"><%= brand.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+<!--  <div class="field">-->
+    <%#= form.label :category_id %>
+    <%#= form.text_field :category_id %>
+<!--  </div>-->
+
+  <div class="field">
+    <label for="product[category_id]">Category:</label>
+    <select name="product[category_id]" id="product[category_id]">
+      <option disabled selected value="<%= nil %>">Select a Category </option>
+      <% @categories.each do |category| %>
+        <option  <% if @product_category == category.name  %> selected <% end %>
+              value="<%= category.id %>"><%= category.name %></option>
+      <% end %>
+    </select>
   </div>
 
   <div class="actions">
