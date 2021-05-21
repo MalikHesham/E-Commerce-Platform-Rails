@@ -21,12 +21,6 @@
           <td><%= order.total %></td>
           <td>
             <%= link_to 'Show', order, class:'btn btn-primary btn-sm' %>
-            <a
-              href="<%= edit_order_path(order) %>"
-              class="btn btn-warning btn-sm <%= order.pending? ? '' : 'disabled' %>"
-            >
-              Edit
-            </a>
             <!-- Button trigger modal -->
             <button
               type="button"
