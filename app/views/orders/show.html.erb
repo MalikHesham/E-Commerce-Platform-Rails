@@ -10,9 +10,6 @@
       <%= @order.created_at %>
     </p>
     <p><strong>Total: $</strong><%= @order.total %></p>
-    <a href="<%= edit_order_path(@order) %>" class="btn btn-warning m-1">
-      Edit Order
-    </a>
     <a href="<%= orders_path %>" class="btn btn-secondary m-1"> Back </a>
   </div>
 </div>
