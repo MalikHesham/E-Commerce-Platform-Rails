@@ -6,5 +6,17 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates_presence_of :name, :avatar
+  validates :name, presence: true
+
+  validate :correct_avatar_type
+
+  private
+
+  def correct_avatar_type
+    if avatar.attached? && !avatar.content_type.in?(%w(image/jpeg image/png))
+      errors.add(:avatar, "must be JPEG or PNG.")
+    elsif !avatar.attached?
+      errors.add(:avatar, "is required.")
+    end
+  end
 end

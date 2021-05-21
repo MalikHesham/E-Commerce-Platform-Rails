@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products =  Product.filter(params.slice(:category, :brand, :price_lte, :price_gte))
-    @products = @products.public_send("search_by_title_or_description", params.require(:q)) if params.slice(:q).present?
+    @products = @products.public_send("search_by_title_or_description", params.fetch(:q)) if params.slice(:q).present?
+    @categories = Category.all
+    @brands = Brand.all
   end
 
   # GET /products/1 or /products/1.json
@@ -33,7 +35,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
     # render plain: params[:product].inspect
     @product = Product.new(product_params)
-    puts @product
+    
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }

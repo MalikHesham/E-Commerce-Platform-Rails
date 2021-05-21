@@ -18,10 +18,11 @@
     color: #ef5b5a;
     background-color:#f1f1f1
 
-  }
-  header nav .link-size{
-        font-size: 1rem !important;
-  }
+      }
+
+      header nav .link-size {
+          font-size: 1rem !important;
+      }
 
   .navbar-nav .nav-link, #logo {
     text-decoration: none;
@@ -60,98 +61,117 @@
     color: #fff;
   }
 
-  .nav-btn:hover{
+  .btn:hover{
         color: #ef5b5a;
 
   }
   </style>
+  <%= yield :stylesheets %>
+
 </head>
 
 <body>
- <header class="">
- <nav class="navbar navbar-expand-lg w-100 border-bottom border-white">
+<header class="">
+  <nav class="navbar navbar-expand-lg w-100 border-bottom border-white">
+    <%= link_to "E-Commerce", root_path, class: "navbar-brand", id: "logo" %>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon navbar-toggler-iconn"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-screen" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item  m-1">
+          <%= link_to :Home, root_path, class: "nav-link link-size nav-a" %>
+        </li>
+        <li class="nav-item m-1">
+          <a class="nav-link link-size" href="#">About</a>
+        </li>
+        <li class="nav-item m-1">
+          <%= link_to :Categories, categories_path, class: "nav-link link-size nav-a" %>
 
-        <a class="navbar-brand nav-a" id="logo" href="#">E-Commerce</a>
-        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon navbar-toggler-iconn"></span>
-        </button>
-        <div class="collapse navbar-collapse bg-screen" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li   class="nav-item  m-1">
-              <a class="nav-link  link-size nav-a" href="#">Home </a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size nav-a" href="#">About</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size nav-a" href="#">Categories</a>
-            </li>
-            <%# <%= link_to "Improve Your Ruby Skills", "/products" %> 
-            <li class="nav-item dropdown m-1">
-              <a class="nav-link dropdown-toggle  link-size nav-a"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                <a class="dropdown-item nav-a" href="#">Action</a>
-                <a class="dropdown-item nav-a" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item nav-a" href="#">Something else here</a>
-              </div>
-            </li>        
-          </ul>
-          <div>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button id="searchbtn" class="btn my-2 my-sm-0 nav-btn" type="submit">Search</button>
-            </form>
+        </li>
+
+        <%# <%= link_to "Improve Your Ruby Skills", "/products" %>
+        <li class="nav-item dropdown m-1">
+          <a class="nav-link dropdown-toggle  link-size" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item nav-a" href="#">Action</a>
+            <a class="dropdown-item nav-a" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item nav-a" href="#">Something else here</a>
           </div>
-          <ul class="navbar-nav ml-auto">
-           <li class="nav-item m-1">
-              <a class="nav-link link-size nav-a" href="#">Profile</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size nav-a" href="#">Login</a>
-            </li>
-            <li class="nav-item m-1">
-              <a class="nav-link link-size nav-a" href="#">Logout</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
- </header>
+        </li>
+      </ul>
+      <div>
+        <%= form_tag(products_path, method: :get, class: "form-inline my-2 my-lg-0", enforce_utf8: false) do %>
+          <%= text_field_tag :q, params[:q], class: "form-control mr-sm-2" %>
+          <%= submit_tag "Search", class: "btn btn-primary my-2 my-sm-0", name: nil %>
+        <% end %>
+<!--        <form class="form-inline my-2 my-lg-0">-->
 
-    <section class="boddy container">
-      <%= yield %>
-    </section>
+<!--          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--          <button id="searchbtn" class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>-->
+<!--        </form>-->
+      </div>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item m-1">
+            <%= link_to(edit_user_registration_path, class: "nav-link link-size") do %>
+              <%= image_tag(current_user.avatar, size: "50x50", class: "img-thumbnail rounded-circle") if current_user.avatar.attached? %>
+              <span class="align-middle"><%= current_user.name?? current_user.name : current_user.email %></span>
+            <% end %>
+          </li>
+          <li class="nav-item m-1">
+            <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link link-size", method: :delete, data: { confirm: "You about to sign out, are you sure?" } %>
+          </li>
+        <% else %>
+          <li class="nav-item m-1">
+            <%= link_to "Login", new_user_session_path, class: "nav-link link-size" %>
+          </li>
+          <li class="nav-item m-1">
+            <%= link_to "Register", new_user_registration_path, class: "nav-link link-size" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
+<section class="boddy container  ">
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</section>
 
 <footer>
- <div class="footer-copyright">
-      <div class="container">
-        <div class="row ">
-          <div class="social-links py-2 col-sm-6">
-            <div class="temp">
-              <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-instagram social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-twitter social-icon pt-2"></i></a>
-              <a href="#" class="text-decoration-none"><i class="fab fa-pinterest social-icon pt-2"></i></a>
-            </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="row ">
+        <div class="social-links py-2 col-sm-6">
+          <div class="temp">
+            <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-instagram social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-twitter social-icon pt-2"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-pinterest social-icon pt-2"></i></a>
           </div>
-          <div class=" py-2 col-sm-6 ">
-            <div class="copyright temp">
-              <p class="pt-2">Copyright &copy; 2020 <span>E-Commerce</span> </p>
-            </div>
+        </div>
+        <div class=" py-2 col-sm-6 ">
+          <div class="copyright temp">
+            <p class="pt-2">Copyright &copy; 2020 <span>E-Commerce</span></p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </footer>
 
-<script
+ <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
   crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+<!-- <script>
+<%= yield :scripts %>
+</script> -->
+<%= yield :scripts %>
 </body>
 </html>

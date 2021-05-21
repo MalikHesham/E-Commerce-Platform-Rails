@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  resources :carts
+  resources :orders
+
+  root to: "products#index"
+
   resources :coupons
   resources :stores
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   resources :products
   resources :brands
   resources :categories
