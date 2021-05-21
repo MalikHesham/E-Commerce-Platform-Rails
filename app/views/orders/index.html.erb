@@ -14,6 +14,7 @@
 
     <tbody>
       <% @orders.each do |order| %>
+      <h3></h3>
       <div>
         <tr class="align-middle">
           <td><%= order.user.name %></td>
@@ -22,18 +23,18 @@
             <%= link_to 'Show', order, class:'btn btn-primary btn-sm' %>
             <a
               href="<%= edit_order_path(order) %>"
-              class="btn btn-warning btn-sm"
+              class="btn btn-warning btn-sm <%= order.pending? ? '' : 'disabled' %>"
             >
               Edit
             </a>
             <!-- Button trigger modal -->
             <button
               type="button"
-              class="btn btn-danger btn-sm"
+              class="btn btn-danger btn-sm <%= order.pending? ? '' : 'disabled' %> "
               data-bs-toggle="modal"
               data-bs-target="#order-<%= order.id %>"
             >
-              Delete
+              Delete Order
             </button>
 
             <!-- Modal -->
@@ -55,6 +56,7 @@
                       aria-label="Close"
                     ></button>
                   </div>
+
                   <div class="modal-body">
                     <strong>
                       Are you sure you want to delete this order?
