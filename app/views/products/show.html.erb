@@ -1,12 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<ul>
   <% @product.images.each do |image| %>
-    <li>
-      <%= image_tag image, style: "width:50px" %>
-    </li>
+      <%= image_tag image, style: "width:150px", class: "card-img-top rounded-lg border border-dark m-2" %>
   <% end %>
-</ul>
 
 
 <p>
