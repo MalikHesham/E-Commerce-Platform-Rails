@@ -1,7 +1,16 @@
+<% content_for :title do %>Products<% end %>
+<% content_for :stylesheets do %>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<% end %>
+<% content_for :scripts do %>
+<!--  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
+<%= render 'filter', categories: @categories, brands: @brands %>
 <h1>Products</h1>
-
 <table>
   <thead>
     <tr>
