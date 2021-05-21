@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_234612) do
+
+ActiveRecord::Schema.define(version: 2021_05_21_162508) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +76,26 @@ ActiveRecord::Schema.define(version: 2021_05_17_234612) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.float "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "product_adapters", force: :cascade do |t|
+    t.integer "item_price"
+    t.integer "product_quantity"
+    t.bigint "product_id"
+    t.string "purchasable_type"
+    t.bigint "purchasable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_adapters_on_product_id"
+    t.index ["purchasable_type", "purchasable_id"], name: "index_product_adapters_on_purchasable_type_and_purchasable_id"
+
   create_table "coupons", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -130,6 +152,8 @@ ActiveRecord::Schema.define(version: 2021_05_17_234612) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "users"
+  add_foreign_key "product_adapters", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "stores", "users"
