@@ -14,7 +14,7 @@
 
     <tbody>
       <% @orders.each do |order| %>
-      <div class="align-middle">
+      <div>
         <tr class="align-middle">
           <td><%= order.user.name %></td>
           <td><%= order.total %></td>
@@ -78,11 +78,20 @@
           </td>
           <td><%= order.created_at.strftime('%a, %d %b %Y, %H:%M') %></td>
           <td><%= order.updated_at.strftime('%a, %d %b %Y, %H:%M') %></td>
-          <td style="color: green">Delivered</td>
-          <!-- checking the order.status value later and determining the color of the td based on that -->
+          <% if order.delivered? %>
+          <td style="color: green"><i class="fas fa-truck"></i> Delivered</td>
+          <% elsif order.confirmed? %>
+          <td style="color: green">
+            <i class="fas fa-check-circle"></i> Confirmed
+          </td>
+          <% else %>
+          <td style="color: goldenrod">
+            <i class="fas fa-exclamation-circle"></i> Pending
+          </td>
           <% end %>
         </tr>
       </div>
+      <% end %>
     </tbody>
   </table>
 </div>
