@@ -1,4 +1,5 @@
-<% content_for :title do %>Products<% end %>
+<% content_for :title do %>Products
+<% end %>
 <% content_for :stylesheets do %>
   <link rel="stylesheet" href="assets/filter/filter.css">
 <% end %>
@@ -8,38 +9,44 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= render 'filter', categories: @categories, brands: @brands %>
 <h1>Products</h1>
-<div class="d-flex flex-row-reverse px-4">
-  <%= link_to 'Add New Product', new_product_path, class: "btn btn-success"%>
+<div class="d-flex justify-content-end px-4">
+  <%= link_to 'Add New Product', new_product_path, class: "btn btn-success mb-2" %>
 </div>
-<div class="row px-4">
-<% @products.each do |product| %>
-    <div class="card my-2 col-12 col-md-4 col-lg-2 rounded-lg mx-4">
-    <div class="text-center">
-      <%= image_tag product.images.first , class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
+<div class="row ml-2">
+  <div class="col-12 col-md-5 col-lg-3 bg-light rounded-lg img-thumbnail">
+    <h2>Filter</h2>
+    <%= render 'filter', categories: @categories, brands: @brands %>
+  </div>
+  <div class="col-12 col-md-7 col-lg-9 bg-light rounded-lg img-thumbnail">
+    <div class="row flex justify-content-center">
+      <% @products.each do |product| %>
+        <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2">
+          <div class="text-center">
+            <%= image_tag product.images.first, class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
 
-    </div>
-      <div class="card-body text-center">
-        <h5 class="card-title"><%= product.title %></h5>
-        <small class="text-muted d-block">Brand: <%= product.brand.name %></small>
-        <small class="text-muted d-block">Category: <%= product.category.name %></small>
-      </div>
-      <div class="card-body p-0 pb-2">
-        <p class="card-text"><%= product.description %></p>
-        <p class="card-text">left: <%= product.in_stock %></p>
-        <p class="card-text">price: $<%= product.price %></p>
-        <%= link_to 'Show', product, class: "btn btn-primary" %>
-        <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
-        <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    </div>
-
-      <% end %>
-      <% if @products.blank? %>
-        <p>No items found!</p>
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= product.title %></h5>
+            <small class="text-muted d-block">Brand: <%= product.brand.name %></small>
+            <small class="text-muted d-block">Category: <%= product.category.name %></small>
+          </div>
+          <div class="card-body p-0 pb-2">
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text">left: <%= product.in_stock %></p>
+            <p class="card-text">price: $<%= product.price %></p>
+            <%= link_to 'Show', product, class: "btn btn-primary" %>
+            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
+            <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
       <% end %>
     </div>
-    <br>
+  </div>
+  <% if @products.blank? %>
+    <p>No items found!</p>
+  <% end %>
+</div>
+<br>
 
 
