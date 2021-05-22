@@ -8,20 +8,24 @@
 <% end %>
 
 <p id="notice"><%= notice %></p>
-<div class="row">
-  <div class="col-12 col-md-5 col-lg-3">
+
+<h1>Products</h1>
+<div class="d-flex justify-content-end px-4">
+  <%= link_to 'Add New Product', new_product_path, class: "btn btn-success mb-2" %>
+</div>
+<div class="row ml-2">
+  <div class="col-12 col-md-5 col-lg-3 bg-light rounded-lg img-thumbnail">
     <h2>Filter</h2>
     <%= render 'filter', categories: @categories, brands: @brands %>
   </div>
-  <div class="col-12 col-md-7 col-lg-9">
-    <h1>Products</h1>
-    <div class="d-flex flex-row-reverse">
-      <%= link_to 'New Product', new_product_path, class: "btn btn-success" %>
-    </div>
-    <div class="row">
+  <div class="col-12 col-md-7 col-lg-9 bg-light rounded-lg img-thumbnail">
+    <div class="row flex justify-content-center">
       <% @products.each do |product| %>
-        <div class="card my-2 col col-sm-4 rounded-lg">
-          <img src="..." class="card-img-top" alt="...">
+        <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2">
+          <div class="text-center">
+            <%= image_tag product.images.first, class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
+
+          </div>
           <div class="card-body text-center">
             <h5 class="card-title"><%= product.title %></h5>
             <small class="text-muted d-block">Brand: <%= product.brand.name %></small>
@@ -33,18 +37,16 @@
             <p class="card-text">price: $<%= product.price %></p>
             <%= link_to 'Show', product, class: "btn btn-primary" %>
             <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
-            <%= link_to 'Destroy', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-            <!--        <button href="#" class="btn btn-primary">Go somewhere</button>-->
+            <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>
         </div>
-
-      <% end %>
-      <% if @products.blank? %>
-        <p>No items found!</p>
       <% end %>
     </div>
-    <br>
-
-    <%= link_to 'New Product', new_product_path %>
   </div>
+  <% if @products.blank? %>
+    <p>No items found!</p>
+  <% end %>
 </div>
+<br>
+
+
