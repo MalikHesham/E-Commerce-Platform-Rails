@@ -10,16 +10,16 @@
 
 <%= render 'filter', categories: @categories, brands: @brands %>
 <h1>Products</h1>
-<div class="d-flex flex-row-reverse">
+<div class="d-flex flex-row-reverse px-4">
   <%= link_to 'Add New Product', new_product_path, class: "btn btn-success"%>
 </div>
-<div class="row">
+<div class="row px-4">
 <% @products.each do |product| %>
-    <%# product.images.each do |image| %>
-      <%#= image_tag image, style: "width:150px;height:150px;", class: "card-img-top rounded-lg border border-dark m-2" %>
-    <%# end %>
-    <div class="card my-2 col col-sm-4 rounded-lg">
-      <img src="..." class="card-img-top" alt="...">
+    <div class="card my-2 col-12 col-md-4 col-lg-2 rounded-lg mx-4">
+    <div class="text-center">
+      <%= image_tag product.images.first , class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
+
+    </div>
       <div class="card-body text-center">
         <h5 class="card-title"><%= product.title %></h5>
         <small class="text-muted d-block">Brand: <%= product.brand.name %></small>
