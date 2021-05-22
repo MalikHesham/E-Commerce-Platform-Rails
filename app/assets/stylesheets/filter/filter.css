@@ -21,8 +21,8 @@ input {
 input[type=number] {
     border: 1px solid #ddd;
     text-align: center;
-    font-size: 1.6em;
-    width: 30%;
+    font-size: large;
+    width: 31%;
 }
 
 input[type=number]::-webkit-outer-spin-button,

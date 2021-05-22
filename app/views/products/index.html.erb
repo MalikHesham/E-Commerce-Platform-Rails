@@ -35,8 +35,11 @@
       </div>
     </div>
 
-<% end %>
-</div>
-<br>
+      <% end %>
+      <% if @products.blank? %>
+        <p>No items found!</p>
+      <% end %>
+    </div>
+    <br>
 
 
