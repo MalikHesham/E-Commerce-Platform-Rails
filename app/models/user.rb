@@ -4,7 +4,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
+  after_create :create_cart
+
   has_one_attached :avatar
+  has_one :cart
+
 
   validates :name, presence: true
 
@@ -18,5 +22,10 @@ class User < ApplicationRecord
     elsif !avatar.attached?
       errors.add(:avatar, "is required.")
     end
+  end
+
+  def create_cart
+    Cart.create({:user_id => id})
+    true
   end
 end

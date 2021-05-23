@@ -3,14 +3,15 @@ class Cart < ApplicationRecord
   has_many :product_adapters, as: :purchasable
 
 
-  before_save :set_subtotal
+  before_save :set_total
 
-  def subtotal
+
+  def total
     product_adapters.collect {|product_adapter| product_adapter.valid? ? (product_adapter.item_price*product_adapter.product_quantity) : 0}.sum
   end
 
   private
-  def set_subtotal
-    self[:subtotal] = subtotal
+  def set_total
+    self[:total] = total
   end
 end
