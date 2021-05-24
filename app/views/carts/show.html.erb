@@ -10,7 +10,8 @@
           <div class="pull-right">
             <%= form_tag carts_path, :method => :patch , remote: true do  %>
               <%= hidden_field_tag :product_id,  item.product.id %>
-              <h5><%= item.product.price %></h5>
+              <h5>Unit Price:<%= item.product.price %></h5>
+              <h5>Item Total:<%= item.product.price*item.product_quantity %></h5>
               <div class="form-group">
                 <%= number_field_tag :product_quantity, item.product_quantity, min: 1, class: 'form-control' %>
               </div>
@@ -18,15 +19,14 @@
                 <%= submit_tag "Update Quantity", class: 'btn btn-primary' %>
                 <%= link_to "Delete", carts_path(:product_id => item.product.id), method: :delete,  data: {confirm: "Are you sure?"}, class: 'btn btn-danger'  %>
               </div>
-<!--              <span>Total Price for item: <%#= item.item_price*item.product_quantity %></span>-->
             <% end %>
           </div>
         </div>
       </div>
     </div>
   <% end %>
+  <div><b>Total:</b><%= number_to_currency @cart.calculate_total %></div>
 
-  <div><b>Total:</b><%= number_to_currency @cart.total %></div>
 
 
 

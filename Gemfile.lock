@@ -263,6 +263,7 @@ DEPENDENCIES
   dotenv-rails
   duktape
   jbuilder (~> 2.5)
+  jquery-rails (~> 4.4)
   pg (~> 1.2, >= 1.2.3)
   puma (~> 3.11)
   rails (~> 5.2.6)
