@@ -19,7 +19,7 @@
     <%= render 'filter', categories: @categories, brands: @brands %>
   </div>
   <div class="col-12 col-md-7 col-lg-9 bg-light rounded-lg img-thumbnail">
-    <div class="row flex justify-content-center">
+    <div class="row justify-content-center">
       <% @products.each do |product| %>
         <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2">
           <div class="text-center">
@@ -42,10 +42,14 @@
         </div>
       <% end %>
     </div>
+    <% if @products.blank? %>
+      <div>
+        <span>Sorry, no items found!</span>
+        <i class="fas fa-frown"></i>
+      </div>
+    <% end %>
   </div>
-  <% if @products.blank? %>
-    <p>No items found!</p>
-  <% end %>
+
 </div>
 <br>
 
