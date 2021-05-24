@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_200013) do
+ActiveRecord::Schema.define(version: 2021_05_24_225053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_200013) do
     t.bigint "purchasable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "confirmed"
     t.index ["product_id"], name: "index_product_adapters_on_product_id"
     t.index ["purchasable_type", "purchasable_id"], name: "index_product_adapters_on_purchasable_type_and_purchasable_id"
   end
@@ -123,10 +124,15 @@ ActiveRecord::Schema.define(version: 2021_05_24_200013) do
   end
 
   create_table "sellers", force: :cascade do |t|
-    t.string "name"
     t.boolean "order_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_sellers_on_order_id"
+    t.index ["product_id"], name: "index_sellers_on_product_id"
+    t.index ["user_id"], name: "index_sellers_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -159,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_200013) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "role"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -171,5 +178,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_200013) do
   add_foreign_key "product_adapters", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
+  add_foreign_key "sellers", "orders"
+  add_foreign_key "sellers", "products"
+  add_foreign_key "sellers", "users"
   add_foreign_key "stores", "users"
 end

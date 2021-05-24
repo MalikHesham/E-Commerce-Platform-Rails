@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
       if Product.where(id: params[:id]).exists?
         @product = Product.find(params[:id])
       else
-        render "notFound"
+        render "Not Found"
       end
     end
 

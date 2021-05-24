@@ -6,4 +6,9 @@ class SellersController < InheritedResources::Base
       params.require(:seller).permit(:name, :order_response)
     end
 
+    def accept
+
+      params.require(:seller).permit(id => seller_id)
+    end
+
 end

@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-      cart = Cart.find(params[:cart_id])
+      cart = current_user.cart
       total = cart.calculate_total
       order = Order.create({:user_id => current_user.id })
       cart.product_adapters.map{|item| item.purchasable = order; item.item_price = item.product.price; item.save}
