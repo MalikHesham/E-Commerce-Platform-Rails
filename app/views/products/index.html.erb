@@ -39,9 +39,12 @@
             <p class="card-text"><%= product.description %></p>
             <p class="card-text">left: <%= product.in_stock %></p>
             <p class="card-text">price: $<%= product.price %></p>
-            <%= link_to 'Show', product, class: "btn btn-primary" %>
-            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
-            <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <div class=""  style="bottom:2px;height: 45%">
+              <%= link_to 'Show', product, class: "btn btn-primary" %>
+              <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
+              <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+
           </div>
         </div>
       <% end %>
