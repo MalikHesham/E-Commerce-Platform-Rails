@@ -31,6 +31,10 @@ class CartsController < ApplicationController
     redirect_to carts_url
   end
 
+  def empty
+    @cart=current_user.cart
+  end
+
   private
   def item_params
     params.permit(:product_id)

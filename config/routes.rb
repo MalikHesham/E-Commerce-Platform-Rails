@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post "carts", to: "carts#add"
   patch "carts", to: "carts#update"
   delete "carts", to: "carts#destroy"
+  put "carts", to: "carts#empty"
   resources :orders
 
   root to: "products#index"

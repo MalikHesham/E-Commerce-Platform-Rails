@@ -7,7 +7,7 @@ class Cart < ApplicationRecord
 
 
   def total
-    product_adapters.collect {|product_adapter| product_adapter.valid? ? (product_adapter.item_price*product_adapter.product_quantity) : 0}.sum
+    product_adapters.collect {|item| item.valid? ? (item.item_price*item.product_quantity) : 0}.sum
   end
 
   private
