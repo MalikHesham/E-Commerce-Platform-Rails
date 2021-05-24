@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-<div class="row justify-content-between mb-3">
+<div class="row justify-content-between bg-white p-4 shadow rounded mb-3">
   <p>
     <strong>Brand Name:</strong>
     <%= @brand.name %>
@@ -11,10 +11,10 @@
     <%= link_to 'Back', brands_path, class: "btn btn-secondary" %>
   </div>
 </div>
-  <div class="bg-light p-4">
-    <div class="row justify-content-center">
+
+    <div class="row justify-content-center bg-light p-4 shadow">
       <% @brand.products.each do |product| %>
-        <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2">
+        <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2 card-shadow">
           <div class="text-center">
             <%= image_tag product.images.first, class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
           </div>
@@ -42,6 +42,6 @@
 
     </div>
 
-  </div>
+
 
 </div>
