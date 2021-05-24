@@ -1,31 +1,39 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Stores</h1>
-
-<table>
-  <thead>
+  <div class="row p-4 bg-white shadow">
+    <div class="col-md-9"><h1>Stores</h1></div>
+    <div class="col-md-3 text-right">
+      <%= link_to 'New Store', new_store_path, class: "btn btn-success" %>
+    </div>
+  </div>
+  <table class="table table-hover  rounded mt-4 bg-light">
+    <thead>
     <tr>
-      <th>Name</th>
-      <th>Summary</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Summary</th>
+      <th class="text-center">User</th>
+      <th class="text-center">Actions</th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @stores.each do |store| %>
       <tr>
-        <td><%= store.name %></td>
-        <td><%= store.summary %></td>
-        <td><%= store.user %></td>
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="text-center"><%= store.name %></td>
+        <td class="text-center"><%= store.summary %></td>
+        <td class="text-center"><%= store.user.name %></td>
+        <td class="text-center">
+          <%= link_to 'Show products', store, class: "btn btn-info" %>
+          <%= link_to 'Edit', edit_store_path(store), class: "btn btn-warning" %>
+          <%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
+</div>
 <br>
 
-<%= link_to 'New Store', new_store_path %>
+

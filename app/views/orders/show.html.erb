@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center bg-white p-4 shadow rounded my-3">
+    <h2>Order Details</h2>
+  </div>
+  <div class="card container shadow p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <p>
+        <strong>Order issued by: </strong>
+        <%= @order.user.name %>
+      </p>
+      <p>
+        <strong>Order issued at: </strong>
+        <%= @order.created_at %>
+      </p>
+      <p><strong>Total: $</strong><%= @order.total %></p>
+      <a href="<%= orders_path %>" class="btn btn-secondary m-1"> Back </a>
+    </div>
+  </div>
+
+</div>

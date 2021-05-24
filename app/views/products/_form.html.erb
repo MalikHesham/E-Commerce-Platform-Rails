@@ -38,6 +38,18 @@
 <!--  </div>-->
 
   <div class="field">
+    <%#= form.label :store %>
+    <%#= form.number_field :store %>
+<!--    <label for="product[store]">Store:</label>-->
+<!--    <select name="product[store]" id="product[store]">-->
+<!--      <option disabled selected>Select store </option>-->
+      <%# current_user.stores.each do |store| %>
+<!--        <option value="<%#= store.id %>"><%#= store.name %></option>-->
+      <%# end %>
+<!--    </select>-->
+    <%= form.select :store_id, options_for_select(current_user.stores.collect { |store| [store.name, store.id ]}), :prompt => "Select store" %>
+  </div>
+  <div class="field">
     <label for="product[brand_id]">Brand:</label>
     <select name="product[brand_id]" id="product[brand_id]">
       <option disabled selected>Select a brand </option>

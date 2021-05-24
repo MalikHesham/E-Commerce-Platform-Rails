@@ -4,7 +4,27 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  has_one_attached :avatar
+  after_create :create_cart
 
-  validates_presence_of :name, :avatar
+  has_one_attached :avatar
+  has_one :cart
+  has_many :stores
+  validates :name, presence: true
+
+  validate :correct_avatar_type
+
+  private
+
+  def correct_avatar_type
+    if avatar.attached? && !avatar.content_type.in?(%w(image/jpeg image/png))
+      errors.add(:avatar, "must be JPEG or PNG.")
+    elsif !avatar.attached?
+      errors.add(:avatar, "is required.")
+    end
+  end
+
+  def create_cart
+    Cart.create({:user_id => id})
+    true
+  end
 end

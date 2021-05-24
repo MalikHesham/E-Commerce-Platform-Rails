@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  resources :sellers
+  get "carts/show", to: "carts#show"
+  post "carts", to: "carts#add"
+  patch "carts", to: "carts#update"
+  delete "carts", to: "carts#destroy"
+  put "carts", to: "carts#empty"
+  resources :orders
+
+  root to: "products#index"
+
   resources :coupons
   resources :stores
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   resources :products
   resources :brands
   resources :categories

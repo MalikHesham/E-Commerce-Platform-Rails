@@ -4,7 +4,13 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products =  Product.filter(params.slice(:category, :brand, :price_lte, :price_gte))
-    @products = @products.public_send("search_by_title_or_description", params.require(:q)) if params.slice(:q).present?
+    @products = @products.public_send("search_by_title_or_description", params.fetch(:q)) if params.slice(:q).present?
+    @categories = Category.all
+    @brands = Brand.all
+    if current_user
+      @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
+    end
+
   end
 
   # GET /products/1 or /products/1.json
@@ -13,6 +19,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @user = current_user
     @brands = Brand.all
     @categories = Category.all
     @product = Product.new
@@ -33,7 +40,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
     # render plain: params[:product].inspect
     @product = Product.new(product_params)
-    puts @product
+    
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -70,11 +77,15 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      if Product.where(id: params[:id]).exists?
+        @product = Product.find(params[:id])
+      else
+        render "notFound"
+      end
     end
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :price, :in_stock, :brand_id, :category_id, images: [])
+      params.require(:product).permit(:title, :description, :price, :in_stock, :brand_id, :category_id, :store_id, images: [])
     end
 end
