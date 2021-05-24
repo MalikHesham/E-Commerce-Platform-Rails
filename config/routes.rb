@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  get "carts", to: "carts#show"
+  get "carts/show", to: "carts#show"
   post "carts", to: "carts#add"
   patch "carts", to: "carts#update"
-
+  delete "carts", to: "carts#destroy"
   resources :orders
 
   root to: "products#index"

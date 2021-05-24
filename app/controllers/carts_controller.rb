@@ -1,7 +1,5 @@
 class CartsController < ApplicationController
 
-
-
   def show
     @cart =current_user.cart
   end
@@ -23,6 +21,14 @@ class CartsController < ApplicationController
     @cart=current_user.cart
     @cart_item =@cart.product_adapters.where(:product_id => update_item_params[:product_id]).first
     @cart_item.update_attributes(update_item_params)
+  end
+
+  def destroy
+    @cart=current_user.cart
+    @cart_item =@cart.product_adapters.where(:product_id => params[:product_id]).first
+    @cart_item.destroy
+
+    redirect_to carts_url
   end
 
   private
