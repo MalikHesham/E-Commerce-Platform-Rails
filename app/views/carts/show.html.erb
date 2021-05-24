@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-4">
           <div class="pull-right">
-            <%= form_tag carts_path, :method => :patch , remote: true do  %>
+            <%= form_tag carts_path, :method => :patch  do  %>
               <%= hidden_field_tag :product_id,  item.product.id %>
               <h5>Unit Price:<%= item.product.price %></h5>
               <h5>Item Total:<%= item.product.price*item.product_quantity %></h5>
