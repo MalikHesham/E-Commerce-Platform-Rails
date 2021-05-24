@@ -26,6 +26,8 @@
     </div>
   <% end %>
   <div><b>Total:</b><%= number_to_currency @cart.calculate_total %></div>
+  <%= link_to "Checkout", orders_path(:cart_id => @cart.id), method: :post,  data: {confirm: "Are you sure?"}, class: 'btn btn-success'  %>
+
 
 
 
