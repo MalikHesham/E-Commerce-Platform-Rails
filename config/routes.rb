@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :carts
+
+  get "carts", to: "carts#show"
+  post "carts", to: "carts#add"
   resources :orders
 
   root to: "products#index"
