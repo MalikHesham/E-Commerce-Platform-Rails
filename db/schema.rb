@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_225053) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "num_of_use"
+    t.float "percentage_of_discount"
   end
 
   create_table "orders", force: :cascade do |t|
