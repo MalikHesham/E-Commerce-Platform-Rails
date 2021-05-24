@@ -16,12 +16,21 @@ class CartsController < ApplicationController
       @cart_item.product_quantity =1
     end
     @cart_item.save
+  end
 
+
+  def update
+    @cart=current_user.cart
+    @cart_item =@cart.product_adapters.where(:product_id => update_item_params[:product_id]).first
+    @cart_item.update_attributes(update_item_params)
   end
 
   private
   def item_params
     params.permit(:product_id)
+  end
+  def update_item_params
+    params.permit(:product_id, :product_quantity)
   end
 
 end

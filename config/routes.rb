@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get "carts", to: "carts#show"
   post "carts", to: "carts#add"
+  patch "carts", to: "carts#update"
+
   resources :orders
 
   root to: "products#index"
