@@ -1,0 +1,6 @@
+<%= form_tag carts_path, :method => :post do  %>
+  <%= hidden_field_tag :product_id, product.id %>
+
+
+  <%= submit_tag "Add to cart", class: 'btn btn-primary btn-block',  :disabled => (@in_cart.include? product.id) %>
+<% end %>

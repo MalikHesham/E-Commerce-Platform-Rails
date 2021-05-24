@@ -7,6 +7,10 @@ class ProductsController < ApplicationController
     @products = @products.public_send("search_by_title_or_description", params.fetch(:q)) if params.slice(:q).present?
     @categories = Category.all
     @brands = Brand.all
+    if current_user
+      @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
+    end
+
   end
 
   # GET /products/1 or /products/1.json
