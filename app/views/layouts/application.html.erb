@@ -58,7 +58,13 @@
     cursor: pointer;
     color: #fff;
   }
-
+  .card-shadow{
+      transition: box-shadow ease-in-out 0.2s;
+  }
+  .card-shadow:hover {
+      box-shadow: 3px 3px 8px 10px #cbcbcb;
+      cursor: pointer;
+  }
   </style>
   <%= yield :stylesheets %>
 
@@ -118,11 +124,11 @@
         <% if user_signed_in? %>
           <li class="nav-item m-1">
             <%= link_to(edit_user_registration_path, class: "nav-link link-size") do %>
-              <%= image_tag(current_user.avatar, size: "50x50", class: "img-thumbnail rounded-circle") if current_user.avatar.attached? %>
+              <%= image_tag(current_user.avatar, class: "border border-primary rounded-circle p-1", style: "width:50px;height:50px;") if current_user.avatar.attached? %>
               <span class="align-middle"><%= current_user.name?? current_user.name : current_user.email %></span>
             <% end %>
           </li>
-          <li class="nav-item m-1">
+          <li class="nav-item m-3">
             <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link link-size", method: :delete, data: { confirm: "You about to sign out, are you sure?" } %>
           </li>
         <% else %>

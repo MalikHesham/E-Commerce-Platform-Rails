@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
 
-  <h1>Stores</h1>
-
+  <div class="row p-4 bg-white shadow">
+    <div class="col-md-9"><h1>Stores</h1></div>
+    <div class="col-md-3 text-right">
+      <%= link_to 'New Store', new_store_path, class: "btn btn-success" %>
+    </div>
+  </div>
   <table class="table table-hover  rounded mt-4 bg-light">
     <thead>
     <tr>
@@ -12,9 +16,7 @@
       <th class="text-center">Actions</th>
     </tr>
     </thead>
-    <div class="d-flex flex-row-reverse">
-      <%= link_to 'New Store', new_store_path, class: "btn btn-success" %>
-    </div>
+
     <tbody>
     <% @stores.each do |store| %>
       <tr>
