@@ -101,24 +101,31 @@
           <%= link_to :Stores, stores_path, class: "nav-link link-size nav-a" %>
         </li>
         <li class="nav-item rounded-pill m-1">
+          <%= link_to :Orders, orders_path, class: "nav-link link-size rounded-pill" %>
+        </li>
+        <li class="nav-item rounded-pill m-1">
           <a class="nav-link link-size" href="#">About</a>
         </li>
-        <%# <%= link_to "Improve Your Ruby Skills", "/products" %>
-        <li class="nav-item rounded-pill dropdown m-1">
-          <a class="nav-link dropdown-toggle  link-size" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Orders
-          </a>
-          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <a class="dropdown-item nav-a rounded-pill" href="#">Pending</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item nav-a rounded-pill" href="#">Confirmed</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item nav-a rounded-pill" href="#">Delivered</a>
-          </div>
-        </li>
-        <li>
-          <%= link_to carts_show_path do %>
-            <i class="fas fa-shopping-cart"></i>
+
+<!--        <li class="nav-item rounded-pill dropdown m-1">-->
+<!--          <a class="nav-link dropdown-toggle  link-size" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--            Orders-->
+<!--          </a>-->
+
+          <%#= link_to :Orders, orders_path, class: "nav-link link-size rounded-pill" %>
+<!--          <div class="dropdown-menu " aria-labelledby="navbarDropdown">-->
+
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a class="dropdown-item nav-a " href="#">Pending</a>-->
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a class="dropdown-item nav-a rounded-pill" href="#">Confirmed</a>-->
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a class="dropdown-item nav-a rounded-pill" href="#">Delivered</a>-->
+<!--          </div>-->
+<!--        </li>-->
+        <li class="nav-item p-1 rounded-pill dropdown">
+          <%= link_to carts_show_path, class: "btn text-secondary" do %>
+            cart <i class="fas fa-shopping-cart"></i>
           <% end %>
         </li>
       </ul>
@@ -135,21 +142,21 @@
       </div>
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <li class="nav-item m-1">
+          <li class="nav-item m-1 rounded-pill">
             <%= link_to(edit_user_registration_path, class: "nav-link link-size") do %>
               <%= image_tag(current_user.avatar, class: "border border-primary rounded-circle p-1", style: "width:50px;height:50px;") if current_user.avatar.attached? %>
               <span class="align-middle"><%= current_user.name?? current_user.name : current_user.email %></span>
             <% end %>
           </li>
-          <li class="nav-item m-3">
+          <li class="nav-item m-3 rounded-pill">
             <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link link-size", method: :delete, data: { confirm: "You about to sign out, are you sure?" } %>
           </li>
         <% else %>
           <li class="nav-item m-1 rounded-pill">
-            <%= link_to "Login", new_user_session_path, class: "nav-link link-size" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link link-size rounded-pill" %>
           </li>
           <li class="nav-item m-1 rounded-pill">
-            <%= link_to "Register", new_user_registration_path, class: "nav-link link-size" %>
+            <%= link_to "Register", new_user_registration_path, class: "nav-link link-size rounded-pill" %>
           </li>
         <% end %>
       </ul>
