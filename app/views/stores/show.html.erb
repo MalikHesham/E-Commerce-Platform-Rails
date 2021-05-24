@@ -1,19 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @store.name %>
-</p>
+<div class="bg-light p-4">
+  <p>
+    <strong>Name:</strong>
+    <%= @store.name %>
+  </p>
 
-<p>
-  <strong>Summary:</strong>
-  <%= @store.summary %>
-</p>
+  <p>
+    <strong>Summary:</strong>
+    <%= @store.summary %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @store.user %>
-</p>
+  <p>
+    <strong>User:</strong>
+    <%= @store.user.name %>
+  </p>
+</div>
 
-<%= link_to 'Edit', edit_store_path(@store) %> |
-<%= link_to 'Back', stores_path %>
+<div class="row justify-content-center">
+<% @store.products.each do |product| %>
+    <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2">
+      <div class="text-center">
+        <%= image_tag product.images.first, class: "card-img-top rounded-lg border m-2 w-50" if product.images.attached? %>
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title"><%= product.title %></h5>
+        <small class="text-muted d-block">Brand: <%= product.brand.name %></small>
+        <small class="text-muted d-block">Category: <%= product.category.name %></small>
+      </div>
+      <div class="card-body p-0 pb-2 position-relative">
+        <p class="card-text "><%= product.description %></p>
+        <p class="card-text">left: <%= product.in_stock %></p>
+        <p class="card-text">price: $<%= product.price %></p>
+        <%= link_to 'Show', product, class: "btn btn-primary" %>
+        <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
+        <%= link_to 'Delete', product, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+<% end %>
+</div>
+<%= link_to 'Edit', edit_store_path(@store), class: "btn btn-info" %>
+<%= link_to 'Back', stores_path, class: "btn btn-secondary" %>

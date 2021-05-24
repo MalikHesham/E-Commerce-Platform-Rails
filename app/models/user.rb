@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   has_one_attached :avatar
-
+  has_many :stores
   validates :name, presence: true
 
   validate :correct_avatar_type
