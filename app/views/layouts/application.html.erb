@@ -65,7 +65,14 @@
       box-shadow: 3px 3px 8px 10px #cbcbcb;
       cursor: pointer;
   }
+  .nav-item{
+      transition: background-color ease-in-out 0.5s;
+  }
+  .nav-item:hover{
+  background-color: white;
+  }
   </style>
+
   <%= yield :stylesheets %>
 
 </head>
@@ -81,31 +88,32 @@
     </button>
     <div class="collapse navbar-collapse bg-screen" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item  m-1">
+        <li class="nav-item rounded-pill  m-1">
           <%= link_to :Home, root_path, class: "nav-link link-size nav-a" %>
         </li>
-        <li class="nav-item m-1">
+        <li class="nav-item rounded-pill m-1">
           <%= link_to :Categories, categories_path, class: "nav-link link-size nav-a" %>
         </li>
-        <li class="nav-item m-1">
+        <li class="nav-item rounded-pill m-1">
           <%= link_to :Brands, brands_path, class: "nav-link link-size nav-a" %>
         </li>
-        <li class="nav-item m-1">
+        <li class="nav-item rounded-pill m-1">
           <%= link_to :Stores, stores_path, class: "nav-link link-size nav-a" %>
         </li>
-        <li class="nav-item m-1">
+        <li class="nav-item rounded-pill m-1">
           <a class="nav-link link-size" href="#">About</a>
         </li>
         <%# <%= link_to "Improve Your Ruby Skills", "/products" %>
-        <li class="nav-item dropdown m-1">
+        <li class="nav-item rounded-pill dropdown m-1">
           <a class="nav-link dropdown-toggle  link-size" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+            Orders
           </a>
           <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <a class="dropdown-item nav-a" href="#">Action</a>
-            <a class="dropdown-item nav-a" href="#">Another action</a>
+            <a class="dropdown-item nav-a rounded-pill" href="#">Pending</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item nav-a" href="#">Something else here</a>
+            <a class="dropdown-item nav-a rounded-pill" href="#">Confirmed</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item nav-a rounded-pill" href="#">Delivered</a>
           </div>
         </li>
       </ul>
@@ -132,10 +140,10 @@
             <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link link-size", method: :delete, data: { confirm: "You about to sign out, are you sure?" } %>
           </li>
         <% else %>
-          <li class="nav-item m-1">
+          <li class="nav-item m-1 rounded-pill">
             <%= link_to "Login", new_user_session_path, class: "nav-link link-size" %>
           </li>
-          <li class="nav-item m-1">
+          <li class="nav-item m-1 rounded-pill">
             <%= link_to "Register", new_user_registration_path, class: "nav-link link-size" %>
           </li>
         <% end %>
