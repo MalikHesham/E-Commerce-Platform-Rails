@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   # scope :filter_by_seller, -> (seller) { joins(:store).where(:stores => { :user_id => seller }) }
   # scope :filter_by_seller, -> (seller) { where(:seller_id => seller.to_i) }
 
-  scope :search_by_title_or_description, -> (q) { where("title like ? or description like ?", "%#{q}%", "%#{q}%") }
+  scope :search_by_title_or_description, -> (q) { where("lower(title) like ? or lower(description) like ?", "%#{q.downcase}%", "%#{q.downcase}%") }
 
   belongs_to :brand
   belongs_to :category
