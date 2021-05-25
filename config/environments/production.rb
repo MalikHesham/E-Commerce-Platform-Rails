@@ -65,15 +65,19 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { :host => 'https://rails-ecommerce-iti41.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address:              ENV.fetch("EMAIL_HOST", 'smtp.gmail.com'),
-    port:                 ENV.fetch("EMAIL_PORT", "587").to_i,
-    domain:               ENV.fetch("DOMAIN", "localhost"),
-    user_name:            ENV.fetch("EMAIL_HOST_USER", '<username>'),
-    password:             ENV.fetch("EMAIL_HOST_PASSWORD", '<password>'),
-    authentication:       'plain',
-    enable_starttls_auto: true }
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV["EMAIL_HOST_USER"],
+    :password             => ENV["EMAIL_HOST_PASSWORD"],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
