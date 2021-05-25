@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     cart.product_adapters.map { |item| item.purchasable = order; item.item_price = item.product.price; item.save; order.store << item.product.store }
     order.total = total
     order.save
-    redirect_to carts_show_path
+    redirect_to products_path
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
