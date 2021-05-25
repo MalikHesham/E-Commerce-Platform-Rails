@@ -5,32 +5,32 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   encoding: unicode
   timeout: 5000
 
 development:
   <<: *default
-  adapter: <%= ENV.fetch("DB_ADAPTER", "sqlite3") %>
-  database: <%= ENV.fetch("DB_NAME") %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
-  host: <%= ENV.fetch("DB_HOST") %>
-  port: <%= ENV.fetch("DB_PORT") %>
+  database: <%= ENV.fetch("DB_NAME", 'myapp_development') %>
+  username: <%= ENV.fetch("DB_USERNAME", '') %>
+  password: <%= ENV.fetch("DB_PASSWORD", '') %>
+  host: <%= ENV.fetch("DB_HOST", '') %>
+  port: <%= ENV.fetch("DB_PORT", '') %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  adapter: <%= ENV.fetch("TEST_DB_ADAPTER", "sqlite3") %>
-  database: <%= ENV.fetch("TEST_DB_NAME") %>
-  username: <%= ENV.fetch("TEST_DB_USERNAME") %>
-  password: <%= ENV.fetch("TEST_DB_PASSWORD") %>
-  host: <%= ENV.fetch("TEST_DB_HOST") %>
-  port: <%= ENV.fetch("TEST_DB_PORT") %>
+  database: <%= ENV.fetch("TEST_DB_NAME", 'myapp_test') %>
+  username: <%= ENV.fetch("TEST_DB_USERNAME", '') %>
+  password: <%= ENV.fetch("TEST_DB_PASSWORD", '') %>
+  host: <%= ENV.fetch("TEST_DB_HOST", '') %>
+  port: <%= ENV.fetch("TEST_DB_PORT", '') %>
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
