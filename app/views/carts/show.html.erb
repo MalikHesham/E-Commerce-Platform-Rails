@@ -10,8 +10,8 @@
           <div class="pull-right">
             <%= form_tag carts_path, :method => :patch  do  %>
               <%= hidden_field_tag :product_id,  item.product.id %>
-              <h5>Unit Price:<%= item.product.price %></h5>
-              <h5>Item Total:<%= item.product.price*item.product_quantity %></h5>
+              <h5>Unit Price:$<%= item.product.price %></h5>
+              <h5>Item Total:$<%= item.product.price*item.product_quantity %></h5>
               <div class="form-group">
                 <%= number_field_tag :product_quantity, item.product_quantity, min: 1,max: item.product.in_stock, class: 'form-control' %>
               </div>
