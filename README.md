@@ -60,14 +60,14 @@ For installing E-commerce website.
 ### 6. Overview
 
  - Home Page
- - ![enter image description here](images/homepage.png)
+  ![enter image description here](images/homepage.png)
 -Products
--![enter image description here](images/produtcs.png)
+![enter image description here](images/products.png)
 - products search or filter
-- ![enter image description here](images/filter.png)
+ ![enter image description here](images/filter.png)
 - browse categories
-- ![enter image description here](images/categories.png)
+ ![enter image description here](images/categories.png)
 - browse brands
-- ![enter image description here](images/brands.png)
+ ![enter image description here](images/brands.png)
 - cart
-- ![enter image description here](images/cart.png)
+ ![enter image description here](images/cart.png)
