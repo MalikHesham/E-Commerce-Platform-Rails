@@ -21,7 +21,9 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
-    @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
+    if current_user
+      @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
+    end
   end
 
   # GET /products/new
