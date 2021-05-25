@@ -25,6 +25,7 @@
   <div class="col-12 col-md-7 col-lg-9 bg-light rounded-lg img-thumbnail">
     <div class="row justify-content-center py-4">
       <% @products.each do |product| %>
+        <% if product.in_stock>0 %>
         <div class="card my-2 col-12 col-md-4 col-lg-3 rounded-lg mx-2 card-shadow">
           <div class="text-center">
             <%= image_tag product.images.first,
@@ -51,6 +52,7 @@
             </div>
           </div>
         </div>
+         <% end %>
       <% end %>
     </div>
     <% if @products.blank? %>

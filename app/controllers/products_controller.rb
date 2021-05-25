@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
     if current_user
       @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
     end
-
   end
 
   # GET /products/1 or /products/1.json

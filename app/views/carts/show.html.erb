@@ -13,7 +13,7 @@
               <h5>Unit Price:<%= item.product.price %></h5>
               <h5>Item Total:<%= item.product.price*item.product_quantity %></h5>
               <div class="form-group">
-                <%= number_field_tag :product_quantity, item.product_quantity, min: 1, class: 'form-control' %>
+                <%= number_field_tag :product_quantity, item.product_quantity, min: 1,max: item.product.in_stock, class: 'form-control' %>
               </div>
               <div class="btn-group">
                 <%= submit_tag "Update Quantity", class: 'btn btn-primary' %>

@@ -8,8 +8,6 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
-    @items = current_user == @order.user ? @order.product_adapter : @order.current_store_orders(current_user)
-    @accepted_count = get_order_confirmed_count(@order)
   end
 
   # GET /orders/new
@@ -25,11 +23,17 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     cart = current_user.cart
+    cart.product_adapters.each do |item|
+      product = Product.where( :id => item.product.id).first
+      product.in_stock = product.in_stock-item.product_quantity
+      product.update_attribute(:in_stock, product.in_stock)
+    end
     total = cart.calculate_total
     order = Order.create({ :user_id => current_user.id })
     cart.product_adapters.map { |item| item.purchasable = order; item.item_price = item.product.price; item.save; order.store << item.product.store }
     order.total = total
     order.save
+    redirect_to carts_show_path
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
