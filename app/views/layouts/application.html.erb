@@ -125,9 +125,6 @@
             <%= link_to :Orders, orders_path, class: "nav-link link-size rounded-pill" %>
           </li>
         <% end %>
-        <li class="nav-item rounded-pill m-1">
-          <a class="nav-link link-size" href="#">About</a>
-        </li>
         <% if can? :read, Cart %>
           <li class="nav-item m-1 rounded-pill dropdown">
             <%= link_to carts_show_path, class: "text-secondary nav-link" do %>
