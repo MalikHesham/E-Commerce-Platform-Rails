@@ -13,6 +13,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def home
+    render "products/home"
+  end
+
   # GET /products/1 or /products/1.json
   def show
   end

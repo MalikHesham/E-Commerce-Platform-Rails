@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   put "carts", to: "carts#empty"
 
   resources :orders
-  root to: "products#index"
+  root to: "products#home"
 
   resources :coupons
   resources :stores
