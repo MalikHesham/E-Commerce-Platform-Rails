@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    @items = current_user == @order.user ? @order.product_adapter : @order.current_store_orders(current_user)
+    @accepted_count = get_order_confirmed_count(@order)
   end
 
   # GET /orders/new
