@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    @items = current_user == @order.user ? @order.product_adapter : @order.current_store_orders(current_user)
+    @accepted_count = get_order_confirmed_count(@order)
   end
 
   # GET /orders/new
@@ -17,38 +19,29 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+
   end
 
   # POST /orders or /orders.json
   def create
-      cart = current_user.cart
-      total = cart.calculate_total
-      order = Order.create({:user_id => current_user.id })
-      cart.product_adapters.map{|item| item.purchasable = order; item.item_price = item.product.price; item.save}
-      order.total = total
-      order.save
-    # @order = Order.new(order_params)
-
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: "Order was successfully created." }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    cart = current_user.cart
+    total = cart.calculate_total
+    order = Order.create({ :user_id => current_user.id })
+    cart.product_adapters.map { |item| item.purchasable = order; item.item_price = item.product.price; item.save; order.store << item.product.store }
+    order.total = total
+    order.save
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if !update_order_params.slice(:mark_delivered).empty?
+      @order.status = 2
+      @order.save
+    else
+      @order.current_store_orders(current_user).update({ :confirmed => true })
+      if get_order_confirmed_count(@order) == @order.product_adapter.size
+        @order.status = 1
+        @order.save
       end
     end
   end
@@ -63,13 +56,22 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:User_id, :total)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def order_params
+    params.require(:order).permit(:User_id, :total)
+  end
+
+  def update_order_params
+    params.permit(:mark_delivered)
+  end
+
+  def get_order_confirmed_count(order)
+    order.product_adapter.pluck(:confirmed).count { |value| value == true }
+  end
 end

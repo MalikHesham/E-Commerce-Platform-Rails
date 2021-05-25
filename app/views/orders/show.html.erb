@@ -13,6 +13,40 @@
         <%= @order.created_at %>
       </p>
       <p><strong>Total: $</strong><%= @order.total %></p>
+
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+          <th scope="col">Confirmed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @items %>
+        </tbody>
+      </table>
+      <div>
+        <% if @order.delivered? %>
+          <span>Delivered Successfully.</span>
+        <% else %>
+          <%= form_tag order_path, :method => :put do %>
+            <% if @accepted_count == @order.product_adapter.size %>
+              <%= hidden_field_tag :mark_delivered, true %>
+              <%= submit_tag "Set as delivered", { :class => "btn btn-success" } %>
+            <% elsif @accepted_count == @items.count %>
+              <%= submit_tag "Waiting other sellers to accept...", { :disabled => true, :class => "btn btn-success" } %>
+            <% else %>
+              <%= submit_tag :Accept, { :class => "btn btn-success" } %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
       <a href="<%= orders_path %>" class="btn btn-secondary m-1"> Back </a>
     </div>
   </div>

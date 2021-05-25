@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  resources :sellers
   get "carts/show", to: "carts#show"
   post "carts", to: "carts#add"
   patch "carts", to: "carts#update"
   delete "carts", to: "carts#destroy"
   put "carts", to: "carts#empty"
-  
-  post "sellers", to: "sellers#accept"
 
   resources :orders
   root to: "products#index"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_225053) do
+ActiveRecord::Schema.define(version: 2021_05_25_005247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(version: 2021_05_24_225053) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "orders_stores", id: false, force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "store_id", null: false
+    t.index ["order_id", "store_id"], name: "index_orders_stores_on_order_id_and_store_id"
+    t.index ["store_id", "order_id"], name: "index_orders_stores_on_store_id_and_order_id"
+  end
+
   create_table "product_adapters", force: :cascade do |t|
     t.integer "item_price"
     t.integer "product_quantity"
@@ -123,18 +130,6 @@ ActiveRecord::Schema.define(version: 2021_05_24_225053) do
     t.integer "store_id"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-  end
-
-  create_table "sellers", force: :cascade do |t|
-    t.boolean "order_response"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "product_id"
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_sellers_on_order_id"
-    t.index ["product_id"], name: "index_sellers_on_product_id"
-    t.index ["user_id"], name: "index_sellers_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -180,8 +175,5 @@ ActiveRecord::Schema.define(version: 2021_05_24_225053) do
   add_foreign_key "product_adapters", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
-  add_foreign_key "sellers", "orders"
-  add_foreign_key "sellers", "products"
-  add_foreign_key "sellers", "users"
   add_foreign_key "stores", "users"
 end

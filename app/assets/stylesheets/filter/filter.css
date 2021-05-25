@@ -1,4 +1,4 @@
-input {
+.filter input {
     box-shadow: 0;
     outline: 0;
 }
@@ -11,52 +11,52 @@ input {
     height: 6em;
 }
 
-.price-slider svg,
-.price-slider input[type=range] {
+.filter .price-slider svg,
+.filter .price-slider input[type=range] {
     position: absolute;
     left: 0;
     bottom: 0;
 }
 
-input[type=number] {
+.filter input[type=number] {
     border: 1px solid #ddd;
     text-align: center;
     font-size: large;
     width: 31%;
 }
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+.filter input[type=number]::-webkit-outer-spin-button,
+.filter input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-input[type=number]:invalid,
-input[type=number]:out-of-range {
+.filter input[type=number]:invalid,
+.filter input[type=number]:out-of-range {
     border: 2px solid #e60023;
 }
 
-input[type=range] {
+.filter input[type=range] {
     -webkit-appearance: none;
     width: 100%;
 }
 
-input[type=range]:focus {
-    outline: none;
+.filter input[type=range]:focus {
+    outline: #a1d0ff;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+.filter input[type=range]:focus::-webkit-slider-runnable-track {
     background: #1da1f2;
 }
 
-input[type=range]:focus::-ms-fill-lower {
+.filter input[type=range]:focus::-ms-fill-lower {
     background: #1da1f2;
 }
 
-input[type=range]:focus::-ms-fill-upper {
+.filter input[type=range]:focus::-ms-fill-upper {
     background: #1da1f2;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+.filter input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
@@ -67,7 +67,7 @@ input[type=range]::-webkit-slider-runnable-track {
     border: 0;
 }
 
-input[type=range]::-webkit-slider-thumb {
+.filter input[type=range]::-webkit-slider-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0 0 0 #000;
@@ -81,7 +81,7 @@ input[type=range]::-webkit-slider-thumb {
     margin-top: -7px;
 }
 
-input[type=range]::-moz-range-track {
+.filter input[type=range]::-moz-range-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
@@ -92,7 +92,7 @@ input[type=range]::-moz-range-track {
     border: 0;
 }
 
-input[type=range]::-moz-range-thumb {
+.filter input[type=range]::-moz-range-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0 0 0 #000;
@@ -104,7 +104,7 @@ input[type=range]::-moz-range-thumb {
     cursor: pointer;
 }
 
-input[type=range]::-ms-track {
+.filter input[type=range]::-ms-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
@@ -114,15 +114,15 @@ input[type=range]::-ms-track {
     color: transparent;
 }
 
-input[type=range]::-ms-fill-lower,
-input[type=range]::-ms-fill-upper {
+.filter input[type=range]::-ms-fill-lower,
+.filter input[type=range]::-ms-fill-upper {
     background: #1da1f2;
     border-radius: 1px;
     box-shadow: none;
     border: 0;
 }
 
-input[type=range]::-ms-thumb {
+.filter input[type=range]::-ms-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0 0 0 #000;
@@ -134,7 +134,7 @@ input[type=range]::-ms-thumb {
     cursor: pointer;
 }
 
-select{
+.filter select{
     width: 100%;
     background: #d4d4d4;
     border-radius: 5px;
@@ -145,7 +145,7 @@ select{
 }
 
 
-select:active{
+.filter select:active{
     border: #1da1f2 1px solid;
     background: #eeeeee;
 }
