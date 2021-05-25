@@ -1,4 +1,5 @@
 class StoresController < InheritedResources::Base
+  before_action :authenticate_user!
 
   # GET /orders or /orders.json
   def index
