@@ -1,17 +1,17 @@
 <% content_for :stylesheets do %>
   <link href="/assets/devise.css" media="all" rel="stylesheet" />
   <style>
-    <% if current_page?(:controller => 'users/registrations', :action => 'edit') %>
+    <%# if current_page?(:controller => 'users/registrations', :action => 'edit') %>
     body {
         background-image: inherit;
     }
 
-    <% else %>
-    .navbar, footer {
-        display: none;
-    }
+    <%# else %>
+<!--    .navbar, footer {-->
+<!--        display: none;-->
+<!--    }-->
 
-    <% end %>
+    <%# end %>
   </style>
 <% end %>
 

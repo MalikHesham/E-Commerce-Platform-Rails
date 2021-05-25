@@ -31,19 +31,24 @@
         </tbody>
       </table>
       <div>
-        <% if @order.delivered? %>
-          <span>Delivered Successfully.</span>
-        <% else %>
-          <%= form_tag order_path, :method => :put do %>
-            <% if @accepted_count == @order.product_adapter.size %>
-              <%= hidden_field_tag :mark_delivered, true %>
-              <%= submit_tag "Set as delivered", { :class => "btn btn-success" } %>
-            <% elsif @accepted_count == @items.count %>
-              <%= submit_tag "Waiting other sellers to accept...", { :disabled => true, :class => "btn btn-success" } %>
-            <% else %>
-              <%= submit_tag :Accept, { :class => "btn btn-success" } %>
+        <% if can? :manage, @order %>
+          <% if @order.delivered? %>
+            <span>Delivered Successfully.</span>
+          <% else %>
+            <%= form_tag order_path, :method => :put do %>
+              <% if @accepted_count == @order.product_adapter.size %>
+                <%= hidden_field_tag :mark_delivered, true %>
+                <%= submit_tag "Set as delivered", { :class => "btn btn-success" } %>
+              <% elsif @accepted_count == @items.count %>
+                <%= submit_tag "Waiting other sellers to accept...", { :disabled => true, :class => "btn btn-success" } %>
+              <% else %>
+                <%= submit_tag :Accept, { :class => "btn btn-success" } %>
+              <% end %>
             <% end %>
           <% end %>
+        <% else %>
+          <%= render "status", :order => @order %>
+
         <% end %>
       </div>
 

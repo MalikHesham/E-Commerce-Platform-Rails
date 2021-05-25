@@ -1,28 +1,30 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
 
-    <div class="row bg-white p-4 mb-3 shadow rounded">
-      <div class="col-md-9">
-        <p>
-          <strong>Store:</strong>
-          <%= @store.name %>
-        </p>
+  <div class="row bg-white p-4 mb-3 shadow rounded">
+    <div class="col-md-9">
+      <p>
+        <strong>Store:</strong>
+        <%= @store.name %>
+      </p>
 
-        <p>
-          <strong>Description:</strong>
-          <%= @store.summary %>
-        </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @store.summary %>
+      </p>
 
-        <p>
-          <strong>Seller:</strong>
-          <%= @store.user.name %>
-        </p>
-      </div>
-      <div class="col-md-3 row align-items-end justify-content-end">
-        <%= link_to 'Edit', edit_store_path(@store), class: "btn btn-warning mx-2" %>
-        <%= link_to 'Back', stores_path, class: "btn btn-secondary" %>
-      </div>
+      <p>
+        <strong>Seller:</strong>
+        <%= @store.user.name %>
+      </p>
     </div>
+    <div class="col-md-3 row align-items-end justify-content-end">
+      <% if can? :update, @store %>
+        <%= link_to 'Edit', edit_store_path(@store), class: "btn btn-warning mx-2" %>
+      <% end %>
+      <%= link_to 'Back', stores_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
 
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -72,7 +74,6 @@
       </table>
     </div>
   </div>
-
 
 
 </div>

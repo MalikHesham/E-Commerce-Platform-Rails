@@ -5,7 +5,12 @@ class Order < ApplicationRecord
   has_many :product_adapter, as: :purchasable
 
   def current_store_orders(current_user)
-    product_adapter.joins(:product).where("products.store_id = ?", current_user.stores.first.id)
+    if current_user.stores.empty?
+      product_adapter.all
+    else
+      product_adapter.joins(:product).where("products.store_id = ?", current_user.stores.first.id)
+
+    end
   end
 
   def custom_total_price(current_user)

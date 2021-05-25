@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  load_and_authorize_resource
+
 
   # GET /orders or /orders.json
   def index
@@ -71,7 +73,6 @@ class OrdersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:User_id, :total)
   end
 
   def update_order_params

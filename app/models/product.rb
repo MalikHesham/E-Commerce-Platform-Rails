@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   scope :filter_by_brand, -> (brand) { joins(:brand).where(:brands => { :name => brand.downcase }) }
   scope :filter_by_price_lte, -> (price) { where("price <= ?", price) }
   scope :filter_by_price_gte, -> (price) { where("price >= ?", price) }
-  scope :filter_by_seller, -> (seller) { joins(:store).where(:stores => { :user_id => seller }) }
+  # scope :filter_by_seller, -> (seller) { joins(:store).where(:stores => { :user_id => seller }) }
   # scope :filter_by_seller, -> (seller) { where(:seller_id => seller.to_i) }
 
   scope :search_by_title_or_description, -> (q) { where("title like ? or description like ?", "%#{q}%", "%#{q}%") }
@@ -19,6 +19,7 @@ class Product < ApplicationRecord
   belongs_to :store
   has_many_attached :images
   has_many :carts
+  has_many :product_adapters
 
   private
 

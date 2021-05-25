@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only: %i[ new edit update destroy ]
+  load_and_authorize_resource
+
 
   # GET /products or /products.json
   def index
@@ -19,6 +21,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+    @in_cart =  current_user.cart.product_adapters.pluck(:product_id)
   end
 
   # GET /products/new
